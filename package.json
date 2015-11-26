@@ -1,6 +1,6 @@
 {
   "name": "posthtml-prefix-class",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "PostHTML plugin to prefix class names",
   "keywords": [
     "posthtml",

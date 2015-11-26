@@ -1,5 +1,7 @@
 # posthtml-prefix-class
 
+[![Build Status](https://travis-ci.org/stevenbenisek/posthtml-prefix-class.svg)](https://travis-ci.org/stevenbenisek/posthtml-prefix-class)
+
 [PostHTML](https://github.com/posthtml/posthtml) plugin to prefix class names.
 
 ## Installation
