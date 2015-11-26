@@ -1,0 +1,39 @@
+{
+  "name": "posthtml-prefix-class",
+  "version": "1.0.0",
+  "description": "PostHTML plugin to prefix class names",
+  "keywords": [
+    "posthtml",
+    "posthtml-plugin",
+    "prefix",
+    "class"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/stevenbenisek/posthtml-prefix-class.git"
+  },
+  "bugs": {
+    "url": "https://github.com/stevenbenisek/posthtml-prefix-class/issues"
+  },
+  "homepage": "https://github.com/stevenbenisek/posthtml-prefix-class",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha -R spec ./test/test.js"
+  },
+  "author": "Steven Benisek <steven.benisek@gmail.com>",
+  "license": "MIT",
+  "devDependencies": {
+    "ghooks": "^1.0.1",
+    "mocha": "^2.3.4",
+    "posthtml": "^0.8.0"
+  },
+  "dependencies": {
+    "minimatch": "^3.0.0",
+    "object-assign": "^4.0.1"
+  },
+  "config": {
+    "ghooks": {
+      "pre-push": "npm test"
+    }
+  }
+}
