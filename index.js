@@ -16,7 +16,7 @@ module.exports = function (options) {
     return function posthtmlPrefixClass(tree) {
         return tree.walk(function (node) {
             var attrs = node.attrs || false;
-            var classNames = attrs.class && attrs.class.split(' ');
+            var classNames = attrs.class && attrs.class.split('/\s+/');
 
             if (!classNames) {
                 return node;
