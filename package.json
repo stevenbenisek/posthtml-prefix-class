@@ -35,5 +35,8 @@
     "ghooks": {
       "pre-push": "npm test"
     }
-  }
+  },
+  "files": [
+    "index.js"
+  ]
 }
