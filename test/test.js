@@ -4,7 +4,58 @@ var assert = require('assert');
 var posthtml = require('posthtml');
 var posthtmlPrefixClass = require('../index.js');
 
-var input = '<div class="selector-1 selector-2"></div>';
+var input = {
+    single: '<div class="selector-1 selector-2"></div>',
+    leading: '<div class=" selector-1 selector-2"></div>',
+    trailing: '<div class="selector-1 selector-2 "></div>',
+    double: '<div class="selector-1  selector-2"></div>',
+    newline: (
+        '<div class="selector-1\
+        selector-2"></div>'
+    ),
+};
+
+describe('posthtml-prefix-class', function () {
+
+    describe('posthtmlPrefixClass()', function () {
+        expect('<div class="selector-1 selector-2"></div>');
+    });
+
+    describe('posthtmlPrefixClass({ prefix: String })', function () {
+        expect(
+            '<div class="prefix-selector-1 prefix-selector-2"></div>',
+            { prefix: 'prefix-' }
+        );
+    });
+
+    describe('posthtmlPrefixClass({ prefix: String, ignore: String })', function () {
+        expect(
+            '<div class="prefix-selector-1 selector-2"></div>',
+            { prefix: 'prefix-', ignore: 'selector-2' }
+        );
+    });
+
+    describe('posthtmlPrefixClass({ prefix: String, ignore: *String })', function () {
+        expect(
+            '<div class="prefix-selector-1 selector-2"></div>',
+            { prefix: 'prefix-', ignore: '*-2' }
+        );
+    });
+
+    describe('posthtmlPrefixClass({ prefix: String, ignore: Array })', function () {
+        expect(
+            '<div class="selector-1 selector-2"></div>',
+            { prefix: 'prefix-', ignore: ['selector-1', 'selector-2'] }
+        );
+    });
+
+    describe('posthtmlPrefixClass({ prefix: String, ignore: *Array })', function () {
+        expect(
+            '<div class="selector-1 selector-2"></div>',
+            { prefix: 'prefix-', ignore: ['*-1', '*-2'] }
+        );
+    });
+});
 
 function test(input, expected, options) {
     return posthtml()
@@ -15,51 +66,44 @@ function test(input, expected, options) {
         });
 }
 
-describe('posthtml-prefix-class', function () {
-    it('posthtmlPrefixClass()', function () {
+function expect(expected, options) {
+    it(input.single, function () {
         return test(
-            input,
-            input
+            input.single,
+            expected,
+            options
         );
     });
 
-    it('posthtmlPrefixClass({ prefix: String })', function () {
+    it(input.leading, function () {
         return test(
-            input,
-            '<div class="prefix-selector-1 prefix-selector-2"></div>',
-            { prefix: 'prefix-' }
+            input.leading,
+            expected,
+            options
         );
     });
 
-    it('posthtmlPrefixClass({ prefix: String, ignore: String })', function () {
+    it(input.trailing, function () {
         return test(
-            input,
-            '<div class="prefix-selector-1 selector-2"></div>',
-            { prefix: 'prefix-', ignore: 'selector-2' }
+            input.trailing,
+            expected,
+            options
         );
     });
 
-    it('posthtmlPrefixClass({ prefix: String, ignore: *String })', function () {
+    it(input.double, function () {
         return test(
-            input,
-            '<div class="prefix-selector-1 selector-2"></div>',
-            { prefix: 'prefix-', ignore: '*-2' }
+            input.double,
+            expected,
+            options
         );
     });
 
-    it('posthtmlPrefixClass({ prefix: String, ignore: Array })', function () {
+    it(input.newline, function () {
         return test(
-            input,
-            input,
-            { prefix: 'prefix-', ignore: ['selector-1', 'selector-2'] }
+            input.newline,
+            expected,
+            options
         );
     });
-
-    it('posthtmlPrefixClass({ prefix: String, ignore: *Array })', function () {
-        return test(
-            input,
-            input,
-            { prefix: 'prefix-', ignore: ['*-1', '*-2'] }
-        );
-    });
-});
+}
